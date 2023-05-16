@@ -1,0 +1,24 @@
+version: 0.2
+
+env:
+  secrets-manager:
+    MONGODB_URI: content_manager.env:MONGODB_URI
+    REFRESH_TOKEN_SECRET: content_manager.env:REFRESH_TOKEN_SECRET
+    ACCESS_TOKEN_SECRET: content_manager.env:ACCESS_TOKEN_SECRET
+    AWS_KEY: content_manager.env:AWS_KEY
+    AWS_SECRET: content_manager.env:AWS_SECRET
+
+
+phases:
+  pre_build:
+    commands:
+      - echo Installing source NPM dependencies...
+      - npm install
+  build:
+    commands:
+      - echo Building the Next.js app...
+      - npm run build
+  post_build:
+    commands:
+      - npm run start 
+
