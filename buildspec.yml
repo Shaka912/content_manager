@@ -21,4 +21,7 @@ phases:
   post_build:
     commands:
       - npm run start 
-
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: yes
