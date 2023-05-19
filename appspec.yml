@@ -13,3 +13,15 @@ hooks:
     - location: /home/ec2-user/application.sh  # Update the script location as per your application's requirements
       timeout: 300
       runas: root
+      
+version: 0.0
+os: linux
+files:
+  - source: application.sh
+    destination: /home/ec2-user/application.sh
+hooks:
+  ApplicationStart:
+    - location: /home/ec2-user/application.sh
+      timeout: 300
+      runas: ec2-user
+
