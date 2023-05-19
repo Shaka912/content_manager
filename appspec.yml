@@ -10,6 +10,6 @@ permissions:
     group: ec2-user  # Update the group as per your application's requirements
 hooks:
   ApplicationStart:
-    - location: /home/ec2-user/application_start.sh  # Update the script location as per your application's requirements
+    - location: /home/ec2-user/application.sh  # Update the script location as per your application's requirements
       timeout: 300
       runas: root
