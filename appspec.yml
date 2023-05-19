@@ -2,9 +2,9 @@ version: 0.0
 os: linux
 files:
   - source: .
-    destination: /var/www/myapp  # Update the destination path as per your application's requirements
+    destination: /home/ec2-user  # Update the destination path as per your application's requirements
 permissions:
-  - object: /var/www/myapp  # Update the object path as per your application's requirements
+  - object: /home/ec2-user/ # Update the object path as per your application's requirements
     pattern: "**"
     owner: ec2-user  # Update the owner as per your application's requirements
     group: ec2-user  # Update the group as per your application's requirements
