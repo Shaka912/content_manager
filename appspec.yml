@@ -1,19 +1,4 @@
-version: 0.0
-os: linux
-files:
-  - source: .
-    destination: /home/ec2-user  # Update the destination path as per your application's requirements
-permissions:
-  - object: /home/ec2-user/ # Update the object path as per your application's requirements
-    pattern: "**"
-    owner: ec2-user  # Update the owner as per your application's requirements
-    group: ec2-user  # Update the group as per your application's requirements
-hooks:
-  ApplicationStart:
-    - location: /home/ec2-user/application.sh  # Update the script location as per your application's requirements
-      timeout: 300
-      runas: root
-      
+  
 version: 0.0
 os: linux
 files:
@@ -24,4 +9,6 @@ hooks:
     - location: /home/ec2-user/application.sh
       timeout: 300
       runas: ec2-user
+      
+ 
 
