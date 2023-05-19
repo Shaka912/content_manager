@@ -8,16 +8,28 @@ import Stack from "@mui/material/Stack";
 import { useSearchPostsQuery, useGetPostsQuery } from "../feautres/postapi";
 import { PostDetailsModal } from "./PostdetailsModal";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function Posts({searchedPosts,fetch}) {
+  const [posts, setposts] = React.useState(null);
+  useEffect(() => {
+   const userid = localStorage.getItem("userid")
+    axios.get(`api/posts/create?userid=${userid}`).then((res) => {
+      setposts(res.data);
+    }).catch((err)=>{
+      console.log(err)
+    
+    })
+   
+  }, [])
   const [searcharray, setsearcharray] = useState([])
-
+  
   const [searchParams, setSearchParams] = useState(null);
-  const {
-    data: posts,
-    error,
-    isLoading,
-  } =  useGetPostsQuery();
+  // const {
+  //   data: posts,
+  //   error,
+  //   isLoading,
+  // } =  useGetPostsQuery(id);
   //searchParams ? useSearchPostsQuery(searchParams) :
   const [selectedPostId, setSelectedPostId] = useState(null);
   const router = useRouter();
@@ -58,6 +70,13 @@ export default function Posts({searchedPosts,fetch}) {
       <div>
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
+            {
+              posts ===null && (
+                <div className="flex justify-center items-center content-center">
+                  <h3 className="text-xl text-center ml-32">NO posts to display please create Posts to start using</h3>
+                </div>
+              )
+            }
             { searcharray?.map((post) => (
               <Grid item xs={6} md={2} key={post._id}>
                 <button

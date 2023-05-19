@@ -1,3 +1,4 @@
+"use client";
 import Select1 from "./Select";
 import Stack from "@mui/joy/Stack";
 import * as React from "react";
@@ -34,12 +35,25 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 export default function Dashboard() {
+  const [tags, settags] = React.useState(null);
+  const [subreddit, setsubs] = React.useState(null);
+  // if (typeof window !== 'undefined') {
+  //   const userId = window.localStorage.getItem('userid');
+  //   // do something with userId
+  //   setid(userId)
+  // }
+ React.useEffect(() => {
+  const userid = localStorage.getItem("userid")
+  axios.get(`api/tags/create?userid=${userid}`).then((res)=>settags(res.data)).catch((err)=>console.log(err))
+  axios.get(`api/subreddit/create?userid=${userid}`).then((res)=>setsubs(res.data)).catch((err)=>console.log(err))
+ }, [])
+  
   const [fetch, setfetch] = React.useState(false);
   const [open1, setOpen1] = React.useState(false);
   const [error1, seterror1] = React.useState("");
   const [success, setsuccess] = React.useState("");
-  const { data: tags, error, isLoading } = useGetTagsQuery();
-  const { data: subreddit, error2, isLoading1 } = useGetSubredditQuery();
+  // const { data: tags, error, isLoading } =id ? useGetTagsQuery(id): {data:undefined};
+  // const { data: subreddit, error2, isLoading1 } =id? useGetSubredditQuery(id) :{data:undefined};
   const [open, setOpen] = React.useState(false);
   const tagnames = tags?.map((tag) => tag.name);
   const subredditnames = subreddit?.map((sub) => sub.name);
@@ -85,6 +99,7 @@ export default function Dashboard() {
     // console.log(personName.indexOf(value))
     console.log(value[0]);
     setsearch(value[0]);
+    
   };
   const handleChangetag = (event) => {
     const {
@@ -111,8 +126,9 @@ export default function Dashboard() {
     // setsearch(value[0]);
   };
   const handleSearchtag = () => {
+    const userid = localStorage.getItem("userid")
     axios
-      .get(`api/posts/search?tags=${tagstore}`)
+      .get(`api/posts/search?tags=${tagstore}&userid=${userid}`)
       .then((res) => {
         console.log(res.data);
         setsuccess("Search is Successfull");
@@ -126,8 +142,9 @@ export default function Dashboard() {
       });
   };
   const handleSearchnotPosted = () => {
+    const userid = localStorage.getItem("userid")
     axios
-      .get("api/posts/search")
+      .get(`api/posts/search?userid=${userid}`)
       .then((res) => {
         console.log(res.data);
         setsuccess("Search is Successfull");
@@ -141,8 +158,9 @@ export default function Dashboard() {
       });
   };
   const handleSearchsubreddit = () => {
+    const userid = localStorage.getItem("userid")
     axios
-      .get(`api/posts/search?subreddits=${redditstore}`)
+      .get(`api/posts/search?subreddits=${redditstore}&userid=${userid}`)
       .then((res) => {
         console.log(res.data);
         setsuccess("Search is Successfull");

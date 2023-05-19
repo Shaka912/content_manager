@@ -87,9 +87,15 @@ export default async function create(req, res) {
       }
     });
   } else if (req.method === "GET") {
-    const posts = await Post.find({});
-
-    res.json(posts);
+    const { query } = req;
+    const userid = query.userid
+    const posts = await Post.find({userid:userid});
+    if(posts.length>0){
+      res.json(posts);
+    }else{
+      res.status(404).json({ message: "No posts found" });
+    
+    }
   } else {
     res.status(405).json({ message: "Request not Allowed" });
   }

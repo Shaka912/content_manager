@@ -17,8 +17,11 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 export default function Create(props) {
-  const { data: tags1, error, isLoading } = useGetTagsQuery();
-  const { data: subreddit1, error2, isLoading1 } = useGetSubredditQuery();
+  
+  // const { data: tags1, error, isLoading } = useGetTagsQuery();
+  // const { data: subreddit1, error2, isLoading1 } = useGetSubredditQuery();
+  const [tags1, settags1] = React.useState(null);
+  const [subreddit1, setsubreddit1] = React.useState(null);
   const [title, settitle] = React.useState("");
   const [url, seturl] = React.useState("");
   const [type, settype] = React.useState("");
@@ -34,7 +37,24 @@ export default function Create(props) {
   const handleClick = () => {
     setOpen(true);
   };
+React.useEffect(() => {
+    const id = localStorage.getItem("userid");
 
+    axios.get(`http://localhost:3000/api/tags/create?userid=${id}`).then((res) => {
+      console.log(res);
+      settags1(res.data);
+    }).catch((err) => {
+      console.log(err);
+    })
+    axios.get(`http://localhost:3000/api/subreddit/create?userid=${id}`).then((res) => {
+      console.log(res);
+      setsubreddit1(res.data);
+    
+    }).catch(err=>{
+      console.log(err);})
+    }  
+    
+  , [])
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
