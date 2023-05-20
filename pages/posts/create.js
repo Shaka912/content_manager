@@ -40,13 +40,13 @@ export default function Create(props) {
 React.useEffect(() => {
     const id = localStorage.getItem("userid");
 
-    axios.get(`http://localhost:3000/api/tags/create?userid=${id}`).then((res) => {
+    axios.get(`api/tags/create?userid=${id}`).then((res) => {
       console.log(res);
       settags1(res.data);
     }).catch((err) => {
       console.log(err);
     })
-    axios.get(`http://localhost:3000/api/subreddit/create?userid=${id}`).then((res) => {
+    axios.get(`api/subreddit/create?userid=${id}`).then((res) => {
       console.log(res);
       setsubreddit1(res.data);
     
