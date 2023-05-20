@@ -209,9 +209,9 @@ React.useEffect(() => {
                   onChange={(e) => settags(e.target.value)}
                 /> */}
                 <label className="font-semibold text-xl my-5">Tags</label>
-                <Grid container spacing={2} className="mt-2">
+                <Grid container spacing={3} className="mt-4">
                   {tags1?.map((tag) => (
-                    <Grid item xs={3} md={2} key={tag._id}>
+                    <Grid item xs={2} md={3} key={tag._id}>
                       <ToggleButtonGroup
                         value={tags}
                         onChange={(event,update) =>{ settags(update);console.log(tags)}}
@@ -253,9 +253,9 @@ React.useEffect(() => {
                   onChange={(e) => setsubreddit(e.target.value)}
                 /> */}
                 <label className="font-semibold text-xl my-5">Subreddit</label>
-                 <Grid container spacing={2} className="mt-2">
+                 <Grid container spacing={3} className="mt-4">
                   {subreddit1?.map((tag) => (
-                    <Grid item xs={3} md={2} key={tag._id}>
+                    <Grid item xs={2} md={3} key={tag._id}>
                       <ToggleButtonGroup
                         value={subreddit}
                         onChange={(event,update) => setsubreddit(update)}
