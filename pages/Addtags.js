@@ -1,5 +1,6 @@
+"use client";
 import Layout from "../components/Layout";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Container, Grid } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Backdrop from "@mui/material/Backdrop";
@@ -18,8 +19,29 @@ export default function Addtags() {
   const [name1, setname1] = useState("");
   const [error1, seterror1] = useState("");
   const [success, setsuccess] = useState("");
-  const { data: tags, error, isLoading } = useGetTagsQuery();
-  const { data: subreddit, error2, isLoading1 } = useGetSubredditQuery();
+  // const { data: tags, error, isLoading } = useGetTagsQuery();
+  // const { data: subreddit, error2, isLoading1 } = useGetSubredditQuery();
+  const [tags, settags] = useState(null);
+  const [subreddit, setsubreddit] = useState(null);
+  useEffect(() => {
+    const id = localStorage.getItem("userid");
+
+    axios.get(`api/tags/create?userid=${id}`).then((res) => {
+      console.log(res);
+      settags(res.data);
+    }).catch((err) => {
+      console.log(err);
+    })
+    axios.get(`api/subreddit/create?userid=${id}`).then((res) => {
+      console.log(res);
+      setsubreddit(res.data);
+    
+    }).catch(err=>{
+      console.log(err);})
+    }  
+    
+  , [])
+  
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);
   const handleDeletetags = (id) => {

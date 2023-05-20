@@ -5,19 +5,19 @@ export const postsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
   endpoints: (builder) => ({
     getPosts: builder.query({
-      query: () => "/posts/create",
+      query: (userid) => `/posts/create?userid=${userid}`,
     }),
     searchTags: builder.query({
-      query: ( tags ) =>
-        `posts/search?tags=${tags}`,
+      query: ( tags,userid ) =>
+        `posts/search?tags=${tags}&userid=${userid}`,
     }),
     searchSubreddit: builder.query({
-      query: ( subreddit ) =>
-        `posts/search?subreddits=${subreddit}`,
+      query: ( subreddit,userid ) =>
+        `posts/search?subreddits=${subreddit}&userid=${userid}`,
     }),
     searchNotPosted: builder.query({
-      query: () =>
-        'posts/search',
+      query: (userid) =>
+        `posts/search?userid=${userid}`,
     }),
     getPostById: builder.query({
       query: (id) => `posts/${id}`,
@@ -30,10 +30,10 @@ export const postsApi = createApi({
       }),
     }),
     getTags: builder.query({
-      query: () => "/tags/create",
+      query: (userid) => `/tags/create?userid=${userid}`,
     }),
     getSubreddit: builder.query({
-      query: () => "/subreddit/create",
+      query: (userid) => `/subreddit/create?userid=${userid}`,
     }),
   }),
 });
