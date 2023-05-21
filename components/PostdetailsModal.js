@@ -144,14 +144,20 @@ export function PostDetailsModal({ postId, onClose, open }) {
   function Displaysub() {
     return newsub?.map((sub) => {
       return (
-        <div
-          className="bg-black rounded-full  justify-evenly items-center flex flex-grow w-2 h-10 ml-5"
-          key={sub.id}
-        >
-          <button onClick={() => handleUpdate(sub.name)} disabled={loading}>
-            <h3 className="text-white text-center py-2">{sub.name}</h3>
-          </button>
-        </div>
+        <Grid container>
+          <div
+            className="bg-black rounded-full flex flex-grow justify-center items-center  w-32 h-10 flex-wrap my-2"
+            key={sub.id}
+          >
+            <button
+              onClick={() => handleUpdate(sub.name)}
+              disabled={loading}
+              className=""
+            >
+              <h3 className="text-white text-center py-2">{sub.name}</h3>
+            </button>
+          </div>
+        </Grid>
       );
     });
   }
@@ -215,24 +221,44 @@ export function PostDetailsModal({ postId, onClose, open }) {
                     </label>
                     <h1 className="text-2xl ">{post?.url}</h1>
                   </div>
-                  <div className="flex flex-row justify-around  my-4">
+                  <div className="flex flex-row justify-around  my-4 items-center flex-wrap">
                     <label className="text-2xl font-bold  bg-slate-300 w-24 h-10 text-center rounded-xl">
                       Tags
                     </label>
-
-                    <h1 className="font-sans  text-2xl  ">{newtag}</h1>
+                     {post?.tags.map((tag, index) => {
+                      return (
+                        <Grid item xs={6} md={4}>
+                          <div
+                            className="bg-orange-300 rounded-xl justify-center items-center flex flex-grow flex-wrap my-2 px-5 py-2 mx-2"
+                            key={index}
+                          >
+                            <h3 className="font-sans  text-xl "> {tag} </h3>
+                          </div>
+                        </Grid>
+                      );
+                    })}
                   </div>
-                  <div className="flex flex-row justify-around">
+                  <div className="flex flex-row justify-around flex-wrap">
                     <label className="text-2xl font-bold  bg-slate-300 w-32 h-10 text-center rounded-xl">
                       Subreddit
                     </label>
                     {edit ? (
                       <Displaysub />
                     ) : (
-                      <h3 className="font-sans  text-2xl ">
-                        {" "}
-                        {post?.subreddit}{" "}
-                      </h3>
+                       <>
+                        {subs?.map((tag, index) => {
+                          return (
+                            <Grid item xs={6} md={6}>
+                              <div
+                                className="bg-orange-300 rounded-xl justify-center items-center flex flex-grow flex-wrap my-2 mx-4 px-4 py-2"
+                                key={index}
+                              >
+                                <h3 className="font-sans  text-xl mx-4"> {tag} </h3>
+                              </div>
+                            </Grid>
+                          );
+                        })}
+                      </>
                     )}
                   </div>
                   <div className="flex flex-row justify-around my-4">
@@ -242,17 +268,17 @@ export function PostDetailsModal({ postId, onClose, open }) {
                     <h1 className="font-sans  text-2xl ">{post?.type}</h1>
                   </div>
                   <div className="flex flex-row justify-around">
-                    <label className="text-2xl font-bold  bg-slate-300 w-36 h-10 text-center rounded-xl">
+                    <label className="text-2xl font-bold  bg-slate-300 w-36 py-5 px-2 text-center rounded-xl">
                       Posted On
                     </label>
                     {edit ? (
                       newstatus?.map((status) => {
                         return (
                           <div
-                            className="bg-blue-900 rounded-full  justify-evenly items-center flex flex-grow ml-5"
+                            className="bg-blue-900 rounded-full h-12  justify-evenly items-center flex  flex-grow ml-5"
                             key={status.id}
                           >
-                            <h3 className="text-white text-center py-2">
+                            <h3 className="text-white text-center py-2 px-3">
                               {status.name}
                             </h3>
                             <button
@@ -265,7 +291,20 @@ export function PostDetailsModal({ postId, onClose, open }) {
                         );
                       })
                     ) : (
-                      <h1 className="font-sans  text-2xl ">{post?.status}</h1>
+                      <>
+                        {post?.status?.map((tag, index) => {
+                          return (
+                            <Grid item xs={6} md={6}>
+                              <div
+                                className=" bg-orange-300 rounded-xl justify-center items-center flex flex-grow flex-wrap my-2 mx-4 px-5 py-2"
+                                key={index}
+                              >
+                                <h3 className="font-sans  text-xl "> {tag} </h3>
+                              </div>
+                            </Grid>
+                          );
+                        })}
+                      </>
                     )}
                   </div>
                 </div>
