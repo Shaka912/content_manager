@@ -226,10 +226,10 @@ export function PostDetailsModal({ postId, onClose, open }) {
                       return (
                         <Grid item xs={6} md={4}>
                           <div
-                            className="bg-orange-300 rounded-xl justify-center items-center flex flex-grow flex-wrap my-2 px-5 py-2 mx-2"
+                            className="bg-orange-300 rounded-xl justify-center items-center flex flex-grow flex-wrap my-2 px-6 py-2 mx-2"
                             key={index}
                           >
-                            <h3 className="font-sans  text-xl "> {tag} </h3>
+                            <h3 className="font-sans  text-xl mx-2 "> {tag} </h3>
                           </div>
                         </Grid>
                       );
@@ -251,7 +251,7 @@ export function PostDetailsModal({ postId, onClose, open }) {
                           return (
                             <Grid item xs={6} md={6}>
                               <div
-                                className="bg-orange-300 rounded-xl justify-center items-center flex flex-grow flex-wrap my-2 mx-4 px-4 py-2"
+                                className="bg-orange-300 rounded-xl justify-center items-center flex flex-grow flex-wrap my-2 mx-4 px-6 py-2"
                                 key={index}
                               >
                                 <h3 className="font-sans  text-xl mx-4"> {tag} </h3>
@@ -298,10 +298,10 @@ export function PostDetailsModal({ postId, onClose, open }) {
                           return (
                             <Grid item xs={6} md={6}>
                               <div
-                                className=" bg-orange-300 rounded-xl justify-center items-center flex flex-grow flex-wrap my-2 mx-4 px-5 py-2"
+                                className=" bg-orange-300 rounded-xl justify-center items-center flex flex-grow flex-wrap my-2 mx-4 px-6 py-2"
                                 key={index}
                               >
-                                <h3 className="font-sans  text-xl "> {tag} </h3>
+                                <h3 className="font-sans  text-xl mx-2"> {tag} </h3>
                               </div>
                             </Grid>
                           );
