@@ -1,19 +1,11 @@
 "use client";
-import { useMediaQuery } from "react-responsive";
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Image from "next/image";
-import TextField from "@mui/material/TextField";
 import * as React from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import Stack from "@mui/joy/Stack";
-import DialogTitle from "@mui/material/DialogTitle";
-import Button from "@mui/material/Button";
 import { useGetPostByIdQuery } from "../feautres/postapi";
 import { RxCross1 } from "react-icons/rx";
 import Backdrop from "@mui/material/Backdrop";
@@ -36,7 +28,7 @@ export function PostDetailsModal({ postId, onClose, open }) {
   const [successmsg, setsuccessmsg] = React.useState("");
   const [newsub, setnewsub] = React.useState([]);
   const [newstatus, setnewstatus] = React.useState([]);
-  const [newtag, setnewtag] = React.useState("")
+  const [newtag, setnewtag] = React.useState("");
   const [subs, setsubs] = React.useState(null);
   function generateUniqueId() {
     return Math.random().toString(36).substr(2, 9);
@@ -47,7 +39,7 @@ export function PostDetailsModal({ postId, onClose, open }) {
     setsubs(ne);
     if (name) {
       const nn = post?.tags.join(",");
-      setnewtag(nn)
+      setnewtag(nn);
       const subreddits = name.split(",");
       const nameIdArray = subreddits.map((name) => {
         return {
@@ -60,7 +52,7 @@ export function PostDetailsModal({ postId, onClose, open }) {
       // console.log(newsub);
     }
     const mane = post?.status;
-    console.log(newtag);
+    //console.log(newtag);
     if (mane) {
       //const status = mane.split(",");
       const statusIdArray = mane.map((name) => {
@@ -206,8 +198,8 @@ export function PostDetailsModal({ postId, onClose, open }) {
                   src={post?.path}
                   alt=""
                   width={350}
-                  height={300}
-                  className="rounded-xl mt-4"
+                  height={400}
+                  className="rounded-xl mt-4 flex-1"
                 />
               </Grid>
               <Grid item xs={6} md={4}>
@@ -228,7 +220,9 @@ export function PostDetailsModal({ postId, onClose, open }) {
                     <label className="text-2xl font-bold  bg-slate-300 w-24 h-10 text-center rounded-xl">
                       Tags
                     </label>
-                     {post?.tags.map((tag, index) => {
+
+                    {/* <h1 className="font-sans  text-2xl  ">{newtag}</h1> */}
+                    {post?.tags.map((tag, index) => {
                       return (
                         <Grid item xs={6} md={4}>
                           <div
@@ -248,7 +242,11 @@ export function PostDetailsModal({ postId, onClose, open }) {
                     {edit ? (
                       <Displaysub />
                     ) : (
-                       <>
+                      // <h3 className="font-sans  text-2xl ">
+                      //   {" "}
+                      //   {post?.subreddit}{" "}
+                      // </h3>
+                      <>
                         {subs?.map((tag, index) => {
                           return (
                             <Grid item xs={6} md={6}>
@@ -294,6 +292,7 @@ export function PostDetailsModal({ postId, onClose, open }) {
                         );
                       })
                     ) : (
+                      // <h1 className="font-sans  text-2xl ">{post?.status}</h1>
                       <>
                         {post?.status?.map((tag, index) => {
                           return (
@@ -313,7 +312,6 @@ export function PostDetailsModal({ postId, onClose, open }) {
                 </div>
               </Grid>
             </Grid>
-            <DialogContentText></DialogContentText>
           </DialogContent>
           <DialogActions className="flex flex-row mr-5">
             <button
@@ -330,7 +328,7 @@ export function PostDetailsModal({ postId, onClose, open }) {
               type="button"
               className="bg-blue-800 text-white px-8 py-2 rounded-xl"
               onClick={() => {
-                setedit(!edit)
+                setedit(!edit);
                 //handleEdit();
               }}
               disabled={loading}
