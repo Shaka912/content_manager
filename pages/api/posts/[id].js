@@ -16,7 +16,7 @@ export default async function handler(req, res) {
     const {
       query: { id },
     } = req;
-    const post = await Post.findOneAndDelete(id);
+    const post = await Post.findOneAndDelete({_id:id});
     if (!post) {
       res.status(404).json({ error: "post not found" });
     }
