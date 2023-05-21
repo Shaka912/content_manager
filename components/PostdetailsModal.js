@@ -37,11 +37,14 @@ export function PostDetailsModal({ postId, onClose, open }) {
   const [newsub, setnewsub] = React.useState([]);
   const [newstatus, setnewstatus] = React.useState([]);
   const [newtag, setnewtag] = React.useState("")
+  const [subs, setsubs] = React.useState(null);
   function generateUniqueId() {
     return Math.random().toString(36).substr(2, 9);
   }
   React.useEffect(() => {
     const name = post?.subreddit;
+    const ne = post?.subreddit.split(",");
+    setsubs(ne);
     if (name) {
       const nn = post?.tags.join(",");
       setnewtag(nn)
