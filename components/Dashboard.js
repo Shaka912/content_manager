@@ -47,7 +47,7 @@ export default function Dashboard() {
   axios.get(`api/tags/create?userid=${userid}`).then((res)=>settags(res.data)).catch((err)=>console.log(err))
   axios.get(`api/subreddit/create?userid=${userid}`).then((res)=>setsubs(res.data)).catch((err)=>console.log(err))
  }, [])
-  
+ const [notsubs, setnotsubs] = React.useState(null);
   const [fetch, setfetch] = React.useState(false);
   const [open1, setOpen1] = React.useState(false);
   const [error1, seterror1] = React.useState("");
@@ -173,6 +173,22 @@ export default function Dashboard() {
         setOpen(true);
       });
   };
+  const handleSearchnotsubreddit = ()=>{
+    const userid = localStorage.getItem("userid")
+    axios
+      .get(`api/posts/subreddits/notposted?subreddits=${redditstore}&userid=${userid}`)
+      .then((res) => {
+        console.log(res.data);
+        setsuccess("Search is Successfull");
+        setOpen1(true);
+        setnotsubs(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        seterror1(err.response.data.message);
+        setOpen(true);
+      });
+  }
   return (
     <>
       <div>
@@ -220,6 +236,7 @@ export default function Dashboard() {
                   settagPosts(null);
                   setsubredditPosts(null);
                   setnotPosted(null);
+                  setnotsubs(null);
                 }}
               >
                 Fetch
@@ -352,7 +369,14 @@ export default function Dashboard() {
                       className="bg-blue-800 text-white px-4 py-2 rounded-xl"
                       onClick={handleSearchsubreddit}
                     >
-                      Search
+                      Search Posted
+                    </button>
+                    <button
+                      type="button"
+                      className="bg-red-600 text-white px-4 py-2 rounded-xl"
+                      onClick={handleSearchnotsubreddit}
+                    >
+                      Search not Posted
                     </button>
                   </Stack>
                 </div>
@@ -373,7 +397,7 @@ export default function Dashboard() {
         </Stack>
         <div className="mt-10">
           <Box sx={{ flexGrow: 1 }}>
-            <Posts searchedPosts={tagPosts || subredditPosts || notPosted} fetch={fetch} />
+            <Posts searchedPosts={tagPosts || subredditPosts || notPosted || notsubs} fetch={fetch} />
           </Box>
         </div>
       </div>
