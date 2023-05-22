@@ -1,17 +1,13 @@
 version: 0.0
 os: linux
-files:
-  - source: /
-    destination: /home/ec2-user/
-permissions:
-  - object: /home/ec2-user/
-    pattern: "**"
-    owner: ec2-user
+
 hooks:
   ApplicationStart:
     - location: application.sh
       timeout: 300
-      runas: ec2-user
+      runas: root
+
+
 
       
  
