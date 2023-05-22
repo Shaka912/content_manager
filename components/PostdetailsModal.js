@@ -210,7 +210,7 @@ export function PostDetailsModal({ postId, onClose, open }) {
                     </label>
                     <h1 className="text-2xl ">{post?.title}</h1>
                   </div>
-                  <div className="flex flex-row justify-around mt-3">
+                  <div className="flex flex-row justify-around mt-3 flex-wrap">
                     <label className="text-2xl font-bold bg-slate-300 w-24 h-10 text-center rounded-xl">
                       URL
                     </label>
