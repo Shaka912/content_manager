@@ -63,7 +63,7 @@ export default async function create(req, res) {
             return res.status(500).json({ error: "Internal Server Error" });
           }
           const tagsArray = fields.tags.toLowerCase().split(",");
-
+          const subsArray = fields.subreddit.toLowerCase().split(",");
           let key = data.key;
           const post = await Post.create({
             _id: new ObjectId(),
@@ -71,7 +71,7 @@ export default async function create(req, res) {
             type: fields.type,
             tags: tagsArray,
             status: fields.status,
-            subreddit: fields.subreddit,
+            subreddit: subsArray,
             userid: fields.userid,
             url:fields.url,
             path: `http://d1dp5nanfre15g.cloudfront.net/${key}`,
