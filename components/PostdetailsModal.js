@@ -35,13 +35,16 @@ export function PostDetailsModal({ postId, onClose, open }) {
   }
   React.useEffect(() => {
     const name = post?.subreddit;
-    const ne = post?.subreddit.split(",");
+    //const ne = post?.subreddit.split(",");
+    const ne = post?.subreddit;
+    console.log(ne);
+    
     setsubs(ne);
     if (name) {
       const nn = post?.tags.join(",");
       setnewtag(nn);
-      const subreddits = name.split(",");
-      const nameIdArray = subreddits.map((name) => {
+    //  const subreddits = name.split(",");
+      const nameIdArray = name.map((name) => {
         return {
           name: name,
           id: generateUniqueId(),
@@ -49,7 +52,7 @@ export function PostDetailsModal({ postId, onClose, open }) {
       });
       // setedit(true);
       setnewsub(nameIdArray);
-      // console.log(newsub);
+       console.log(newsub);
     }
     const mane = post?.status;
     //console.log(newtag);
@@ -210,7 +213,7 @@ export function PostDetailsModal({ postId, onClose, open }) {
                     </label>
                     <h1 className="text-2xl ">{post?.title}</h1>
                   </div>
-                  <div className="flex flex-row justify-around mt-3 flex-wrap">
+                  <div className="flex flex-row justify-around mt-3">
                     <label className="text-2xl font-bold bg-slate-300 w-24 h-10 text-center rounded-xl">
                       URL
                     </label>
@@ -226,10 +229,10 @@ export function PostDetailsModal({ postId, onClose, open }) {
                       return (
                         <Grid item xs={6} md={4}>
                           <div
-                            className="bg-orange-300 rounded-xl justify-center items-center flex flex-grow flex-wrap my-2 px-6 py-2 mx-2"
+                            className="bg-orange-300 rounded-xl justify-center items-center flex flex-grow flex-wrap my-2 px-5 py-2 mx-2"
                             key={index}
                           >
-                            <h3 className="font-sans  text-xl mx-2 "> {tag} </h3>
+                            <h3 className="font-sans  text-xl "> {tag} </h3>
                           </div>
                         </Grid>
                       );
@@ -251,7 +254,7 @@ export function PostDetailsModal({ postId, onClose, open }) {
                           return (
                             <Grid item xs={6} md={6}>
                               <div
-                                className="bg-orange-300 rounded-xl justify-center items-center flex flex-grow flex-wrap my-2 mx-4 px-6 py-2"
+                                className="bg-orange-300 rounded-xl justify-center items-center flex flex-grow flex-wrap my-2 mx-4 px-4 py-2"
                                 key={index}
                               >
                                 <h3 className="font-sans  text-xl mx-4"> {tag} </h3>
@@ -298,10 +301,10 @@ export function PostDetailsModal({ postId, onClose, open }) {
                           return (
                             <Grid item xs={6} md={6}>
                               <div
-                                className=" bg-orange-300 rounded-xl justify-center items-center flex flex-grow flex-wrap my-2 mx-4 px-6 py-2"
+                                className=" bg-orange-300 rounded-xl justify-center items-center flex flex-grow flex-wrap my-2 mx-4 px-5 py-2"
                                 key={index}
                               >
-                                <h3 className="font-sans  text-xl mx-2"> {tag} </h3>
+                                <h3 className="font-sans  text-xl "> {tag} </h3>
                               </div>
                             </Grid>
                           );
