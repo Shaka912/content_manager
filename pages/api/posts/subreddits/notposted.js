@@ -14,14 +14,14 @@ export default async function handler(req, res) {
       res.status(400).json({ error: "bad request" });
     }
     const subreddit = subreddit1 ? subreddit1.split(",") : null;
-    console.log(subreddit);
     if (subreddit.length > 0) {
-      const subs = await Post.find({
+      const posts = await Post.find({
         userid: userid,
-        status: { $nin: subreddit },
-      });
-      if (subs.length > 0) {
-        res.json(subs);
+        subreddit: { $in: subreddit },
+      })
+      const filteredPosts = posts.filter(post => !subreddit.some(tag => post.status.includes(tag)));
+      if (filteredPosts.length > 0) {
+        res.json(filteredPosts);
       } else {
         res.status(404).json({ error: "no posts found with notposted subs" });
       }
